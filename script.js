@@ -61,15 +61,16 @@ function game() {
     for (let i = 1; i <= 5; i++) {
         let userChoice = prompt(`round ${i}! What is your move?`);
         let computerChoice = getComputerChoice();
+        console.log(`computer chose ${computerChoice}!`);
         let result = playRound(userChoice, computerChoice);
         console.log(result);
         if (result == "please type either rock, paper, or scissors.") {
             i--;
         }
-        else if (result == "you lose.") {
+        else if (result == "you win.") {
             userTally++;
         }
-        else if (result == "you win.") {
+        else if (result == "you lose.") {
             computerTally++;
         }
     }
