@@ -1,3 +1,5 @@
+game();
+
 function getComputerChoice() {
     let rand = Math.random();
     if (rand < 1/3) {
