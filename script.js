@@ -51,3 +51,35 @@ function playRound(playerSelection, computerSelection) {
             return "please type either rock, paper, or scissors."
     }
 }
+
+function game() {
+    console.log("let's play rock paper scissors, best of five!");
+
+    let userTally = 0;
+    let computerTally = 0;
+
+    for (let i = 1; i <= 5; i++) {
+        let userChoice = prompt(`round ${i}! What is your move?`);
+        let computerChoice = getComputerChoice();
+        let result = playRound(userChoice, computerChoice);
+        console.log(result);
+        if (result == "please type either rock, paper, or scissors.") {
+            i--;
+        }
+        else if (result == "you lose.") {
+            userTally++;
+        }
+        else if (result == "you win.") {
+            computerTally++;
+        }
+    }
+    if (userTally > computerTally) {
+        alert("you win!");
+    }
+    else if (userTally == computerTally) {
+        alert("it's a tie!");
+    }
+    else {
+        alert("you lose!");
+    }
+}
