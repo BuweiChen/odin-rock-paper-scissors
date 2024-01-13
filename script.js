@@ -1,5 +1,3 @@
-game();
-
 function getComputerChoice() {
     let rand = Math.random();
     if (rand < 1/3) {
@@ -54,35 +52,46 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    console.log("let's play rock paper scissors, best of five!");
-
-    let userTally = 0;
-    let computerTally = 0;
-
-    for (let i = 1; i <= 5; i++) {
-        let userChoice = prompt(`round ${i}! What is your move?`);
-        let computerChoice = getComputerChoice();
-        console.log(`computer chose ${computerChoice}!`);
-        let result = playRound(userChoice, computerChoice);
-        console.log(result);
-        if (result == "please type either rock, paper, or scissors.") {
-            i--;
-        }
-        else if (result == "you win.") {
-            userTally++;
-        }
-        else if (result == "you lose.") {
-            computerTally++;
-        }
+function game(userChoice) {
+    let computerChoice = getComputerChoice();
+    alert(`computer chose ${computerChoice}!`);
+    let result = playRound(userChoice, computerChoice);
+    alert(result);
+    if (result == "please type either rock, paper, or scissors.") {
+        i--;
     }
-    if (userTally > computerTally) {
+    else if (result == "you win.") {
+        playerScore++;
+    }
+    else if (result == "you lose.") {
+        computerScore++;
+    }
+
+    if (playerScore >= 5) {
         alert("you win!");
     }
-    else if (userTally == computerTally) {
-        alert("it's a tie!");
-    }
-    else {
+    if (computerScore >= 5) {
         alert("you lose!");
     }
+    scoreBoard.removeAttribute("hidden");
+    scoreBoard.innerText = `Player ${playerScore} : Computer ${computerScore}`;
 }
+
+let playerScore = 0;
+let computerScore = 0;
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
+rockButton.addEventListener("click", () => game("rock"));
+paperButton.addEventListener("click", () => game("paper"));
+scissorsButton.addEventListener("click", () => game("scissors"));
+
+const scoreBoard = document.createElement("div");
+scoreBoard.style.textAlign = "center";
+document.body.appendChild(scoreBoard);
+scoreBoard.innerText = `Player ${playerScore} : Computer ${computerScore}`;
+scoreBoard.setAttribute("hidden", "");
+
+alert("let's play rock paper scissors, first to five!");
